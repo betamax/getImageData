@@ -7,7 +7,7 @@ For detailed usage instructions and examples please see: [http://www.maxnov.com/
 
 [project_url]: http://www.maxnov.com/getimagedata/
 
-TO DO
+To Do
 -----
 
  * Add more server examples - the more the better!
