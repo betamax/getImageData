@@ -19,7 +19,7 @@ Changelog
 
 Version 0.2 - 13/09/10
 
- * Added two example servers, written in PHP and Python - Please add more!!
+ * Added two example servers, written in PHP and Python - **Please contribute by adding your own!!**
  * Added ability to specify the server URL using the `server` parameter
 
 Version 0.1 - 3/09/10
