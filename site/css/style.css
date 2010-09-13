@@ -59,6 +59,22 @@ a.more {
 	border-bottom:1px dotted #ddd;
 }
 
+#fork-me {			
+	display:block;
+	width:149px;
+	height:149px;
+  position:absolute;
+	top:0;
+	left:0;
+	border:0;
+}
+.dark #fork-me {
+	background-image:url("http://s3.amazonaws.com/github/ribbons/forkme_left_white_ffffff.png");
+}
+.light #fork-me {
+	background-image:url("http://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png");
+}
+
 h1, h2, h3 {
 	font-family: 'OFL Sorts Mill Goudy TT', Georgia, serif; 
 	font-weight:normal;
