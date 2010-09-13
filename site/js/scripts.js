@@ -85,6 +85,12 @@ HomePage.prototype = {
 		// Set up scroll events for animated scrolling
 		this.setupScrollEvents();
 		
+		// Configure URLs with data-target="external" to open in a new window
+		$('a[data-target="external"]').click(function(e){
+			window.open($(this).attr("href"));
+			return false;
+		});
+		
 		// Add hover event to headings to toggle the paragraph symbol
 		$("section>h2, section>h3").hover(function(){
 			$(this).children(".pilcrow").show();
