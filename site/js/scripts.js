@@ -91,6 +91,14 @@ HomePage.prototype = {
 			return false;
 		});
 		
+		// Update window.mouse*Pos with the mouse position
+		$(document).mousemove(function(e){
+      window.mouseXPos = e.pageX;
+      window.mouseYPos = e.pageY;
+   });
+		
+		this.initRollovers();
+		
 		// Add hover event to headings to toggle the paragraph symbol
 		$("section>h2, section>h3").hover(function(){
 			$(this).children(".pilcrow").show();
@@ -125,6 +133,85 @@ HomePage.prototype = {
 			if ( e.which > 0 || e.type == "mousedown" || e.type == "mousewheel"){
 				$("html,body").stop();
 			}
+		});
+	},
+	initRollovers: function(){
+		
+		// For parents
+		$(".button.parent").each(function(k,v){
+			var button_vertical_spacing = 30; // How much to increment button vertical position by
+			var id = $(this).children("a").attr("href").replace("#",""); // The ID of the button
+			var pos = $(this).position(); // The buttons position
+			var total = $('div[data-parent="'+id+'"]').length; // Total number of sub-buttons there are
+			var widest = 0; // Holds the width of the widest button
+			
+			// Container for the position of the newly shown buttons
+			var final_position = { top: pos.top+button_vertical_spacing, left: pos.left, bottom: 0, right:0 };
+			
+			// Loop through each sub-button
+			$('div[data-parent="'+id+'"]').each(function(k,v){
+				
+				// Position it below the parent button and offset the height
+				$(this).css({"left": pos.left, "top": pos.top+(button_vertical_spacing*(k+1))});
+				
+				// Update widest if this button is wider
+				widest = $(this).width() > widest ? $(this).width() : widest;
+				
+				// If the end of the loop has been reached
+				if(k == (total-1)) {
+					// Set the bottom position to the top + how many buttons there were * the button height
+					final_position.bottom = final_position.top + (button_vertical_spacing*(k+1))+$(this).height();
+					// Set the right position to the left + the widest button width
+					final_position.right = final_position.left + widest;
+				}
+				
+			});
+			// Add the position data to the element
+			$(this).data("boundaries", final_position);
+		
+		});
+		
+		// Hover events
+		$(".button.parent").mouseenter(function(){
+			// First remove any intervals that may still be happenings
+			clearInterval($(this).data("interval"));
+			
+			// Get the ID of the button
+			var id = $(this).children("a").attr("href").replace("#","");
+
+			// Loop through each sub-button, stop any animation and then fade it in
+			$('div[data-parent="'+id+'"]').each(function(k,v){
+				$(this).stop(true, true).fadeIn();
+			});
+			
+		// Mouse leave event
+		}).mouseleave(function(e){
+			var $this = $(this); // Container for this
+			var id = $this.children("a").attr("href").replace("#",""); // The ID of the button
+			
+			// Set this code to check again ever 650ms
+			var interval = setInterval(function(){
+				
+				// Get the BBox around the sub- buttons
+				var position = $this.data("boundaries");
+				
+				// If over the sub-buttons
+				if(window.mouseXPos > position.left && window.mouseXPos < position.right && window.mouseYPos > position.top && window.mouseYPos < position.bottom) {
+				
+				// Not over the sub-buttons so hide then 
+				} else {
+					// For each sub-button
+					$('div[data-parent="'+id+'"]').each(function(k,v){
+						// Stop any animation and fade out
+						$(this).stop(true, true).fadeOut();
+						// Stop this interval from checking again
+						clearInterval(interval);
+					});
+				}
+			},650);
+			
+			// Assign the interval to this element
+			$(this).data("interval",interval);
 		});
 	},
 	isBackgroundSet: function(){

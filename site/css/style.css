@@ -89,6 +89,12 @@ h3 {
 	font-size:1.5em;
 	margin-top:16px;
 }
+h3.no-margin {
+	margin-top:0px;
+}
+h3.sub {
+	font-size:1.3em;
+}
 p {
 	line-height:1.5;
 }
@@ -147,6 +153,11 @@ nav .button a {
 }
 .button:last-child {
 	margin-right:0px !important;
+}
+
+.button.sub {
+	display:none;
+	position:absolute;
 }
 
 /* Button colours: Light */

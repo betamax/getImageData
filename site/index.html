@@ -33,10 +33,11 @@
 			<div class="button"><a href="#about">About</a></div>
 			<div class="button"><a href="#download">Download</a></div>
 			<div class="button"><a href="#installation">Installation</a></div>
-			<div class="button"><a href="#how-to-use">How To Use</a></div>
+			<div class="button"><a href="#usage">Usage</a></div>
 			<div class="button"><a href="#examples">Examples</a></div>
-			<div class="button"><a href="#technical-specification">Technical Spec.</a></div>
-			<div class="button"><a href="#server-specification">Server Spec.</a></div>
+			<div class="button parent"><a href="#specification">Specification</a></div>
+			<div class="button sub" data-parent="specification"><a href="#technical-specification">Technical Specification</a></div>
+			<div class="button sub" data-parent="specification"><a href="#server-specification">Server Specification</a></div>
 			<div class="button"><a href="#notes">Notes</a></div>
 			<div class="button"><a href="#attributions">Attributions</a></div>
 			<div class="button"><a href="#license">License</a></div>
@@ -68,8 +69,8 @@
 			&lt;/body&gt;</pre>
 		</section>
 		<div class="hr"><hr></div>
-		<section id="how-to-use">
-			<h2>How to use<a href="#how-to-use" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+		<section id="usage">
+			<h2>Usage<a href="#usage" class="pilcrow" title="Permalink to this section">&para;</a></h2>
 			<p>
 				Once you have installed the plugin, you are ready to call the $.getImageData function. The function expects one parameter which must be an object consisting of three properties: <span class="code">url</span>, <span class="code">success</span> and <span class="code">error</span>. <span class="code">url</span> is a string containing the URL of the image you are trying to fetch. <span class="code">success</span> and <span class="code">error</span> are callback functions that are called on successful fetching of the image or failure.
 			</p>
@@ -195,134 +196,137 @@
 			}</pre>
 		</section>
 		<div class="hr"><hr></div>
-		<section id="technical-specification">
-			<h2>Technical Specification<a href="#technical-specification" class="pilcrow" title="Permalink to this section">&para;</a></h2>
-			<p>
-				The main function that $.getImageData provides is the server-side image fetching. This is done using a Django project hosted on the <a href="http://code.google.com/appengine/" class="more" data-target="external">Google App Engine</a><sup><a href="#note-1">1</a></sup>. It is a very simple project and could easily be recreated in PHP or any server-side language. The purpose of $.getImageData is to enable people to get images across domains without the need for any server-side code.
-			</p>
-			<br />
-			<p>
-				$.getImageData consists of one function that uses the <a href="http://code.google.com/p/jquery-jsonp/" class="more" data-target="external">jQuery JSONP Core Plugin</a> (written by Julian Aubourg) which is packaged with this plugin. The reason for using this JSONP plugin is so that an error callback can be called if the server does not return an image for whatever reason. As mentioned <a href="#how-to-use">above</a>, initialising the plugin is very similar to calling <a href="http://api.jquery.com/jQuery.getJSON/" class="more" data-target="external">getJSON</a>:
-			</p>
-			<pre class="brush: js">
-				$.getImageData({
-					url, 
-					success: callback(image){}, 
-					error: callback(xhr, text_status){}
-				});</pre>
-			<div class="spec">
-				<h4>url</h4>
-				<span class="type">String</span>
+		<section id="specification">
+			<h2>Specification<a href="#specification" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<section id="technical-specification">
+				<h3 class="no-margin">Technical Specification<a href="#technical-specification" class="pilcrow" title="Permalink to this section">&para;</a></h3>
 				<p>
-					The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+					The main function that $.getImageData provides is the server-side image fetching. This is done using a Django project hosted on the <a href="http://code.google.com/appengine/" class="more" data-target="external">Google App Engine</a><sup><a href="#note-1">1</a></sup>. It is a very simple project and could easily be recreated in PHP or any server-side language. The purpose of $.getImageData is to enable people to get images across domains without the need for any server-side code.
 				</p>
-			</div>
-			<div class="spec">
-				<h4>success: callback(image)</h4>
-				<span class="type">Function</span>
+				<br />
 				<p>
-					This function is called on successful fetching of the requested image. It receives one argument which is an Image() object that consists of the image and it's width and height as the properties <span class="code">width</span> and <span class="code">height</span>.
+					$.getImageData consists of one function that uses the <a href="http://code.google.com/p/jquery-jsonp/" class="more" data-target="external">jQuery JSONP Core Plugin</a> (written by Julian Aubourg) which is packaged with this plugin. The reason for using this JSONP plugin is so that an error callback can be called if the server does not return an image for whatever reason. As mentioned <a href="#usage">above</a>, initialising the plugin is very similar to calling <a href="http://api.jquery.com/jQuery.getJSON/" class="more" data-target="external">getJSON</a>:
 				</p>
-			</div>
-			<div class="spec">
-				<h4>error: callback(xhr, text_status, error_throwdown)</h4>
-				<span class="type">Function</span>
+				<pre class="brush: js">
+					$.getImageData({
+						url, 
+						success: callback(image){}, 
+						error: callback(xhr, text_status){}
+					});</pre>
+				<div class="spec">
+					<h4>url</h4>
+					<span class="type">String</span>
+					<p>
+						The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+					</p>
+				</div>
+				<div class="spec">
+					<h4>success: callback(image)</h4>
+					<span class="type">Function</span>
+					<p>
+						This function is called on successful fetching of the requested image. It receives one argument which is an Image() object that consists of the image and it's width and height as the properties <span class="code">width</span> and <span class="code">height</span>.
+					</p>
+				</div>
+				<div class="spec">
+					<h4>error: callback(xhr, text_status, error_throwdown)</h4>
+					<span class="type">Function</span>
+					<p>
+						This function is called if the server returns an error code or takes more than 10 seconds (10000 ms) to execute. It receives two arguments which are <span class="code">xhr</span>: the XMLHttpRequest and <span class="code">text_status</span>: the status returned by the server (usually <span class="code">error</span> or <span class="code">no_url</span>).
+					</p>
+				</div>
+			</section>
+			<div class="hr"><hr></div>
+			<section id="server-specification">
+				<h3 class="no-margin">Server Specification<a href="#server-specification" class="pilcrow" title="Permalink to this section">&para;</a></h3>
 				<p>
-					This function is called if the server returns an error code or takes more than 10 seconds (10000 ms) to execute. It receives two arguments which are <span class="code">xhr</span>: the XMLHttpRequest and <span class="code">text_status</span>: the status returned by the server (usually <span class="code">error</span> or <span class="code">no_url</span>).
+					$.getImageData provides a simple wrapper around the server-side code that allows callbacks to be added when the image has been loaded or if it fails. You can, however, directly query the server and get the same result. The server addresses are:
 				</p>
-			</div>
-		</section>
-		<div class="hr"><hr></div>
-		<section id="server-specification">
-			<h2>Server Specification<a href="#server-specification" class="pilcrow" title="Permalink to this section">&para;</a></h2>
-			<p>
-				$.getImageData provides a simple wrapper around the server-side code that allows callbacks to be added when the image has been loaded or if it fails. You can, however, directly query the server and get the same result. The server addresses are:
-			</p>
-			<pre class="brush: xml">
-			http://img-to-json.maxnov.com/</pre>
-			<p>
-				And for secure requests:
-			</p>
-			<pre class="brush: xml">
-			https://img-to-json.appspot.com/</pre>
-			<p>
-				The call to the server can be made using an XMLHttpRequest to one of the above URLs. The server expects two things:
-			</p>
-			<div class="spec">
-				<h4>url</h4>
-				<span class="type">String</span>
+				<pre class="brush: xml">
+				http://img-to-json.maxnov.com/</pre>
 				<p>
-					The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+					And for secure requests:
 				</p>
-			</div>
-			<div class="spec no-border">
-				<h4>callback</h4>
-				<span class="type">String</span>
+				<pre class="brush: xml">
+				https://img-to-json.appspot.com/</pre>
 				<p>
-					The callback function to be called on server response. Default should be ?. This is to enable cross-domain JSON serving.
+					The call to the server can be made using an XMLHttpRequest to one of the above URLs. The server expects two things:
 				</p>
-			</div>
-			<p>
-				The server will respond with a JSON object consisting of <span class="code">data</span>: the image data as a base64 encoded data URL, <span class="code">width</span>: the width of the image and <span class="code">height</span>: the height of the image.
-			</p>
+				<div class="spec">
+					<h4>url</h4>
+					<span class="type">String</span>
+					<p>
+						The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+					</p>
+				</div>
+				<div class="spec no-border">
+					<h4>callback</h4>
+					<span class="type">String</span>
+					<p>
+						The callback function to be called on server response. Default should be ?. This is to enable cross-domain JSON serving.
+					</p>
+				</div>
+				<p>
+					The server will respond with a JSON object consisting of <span class="code">data</span>: the image data as a base64 encoded data URL, <span class="code">width</span>: the width of the image and <span class="code">height</span>: the height of the image.
+				</p>
 			
-			<h3 id="example-no-plugin">Example request without the plugin:<a href="#example-no-plugin" class="pilcrow" title="Permalink to this section">&para;</a></h3>
-			<pre class="brush: js">
-				// Create an AJAX request
-				$.ajax({
-					type: "GET",
-					dataType: "json",
-					// Query the server with a callback of "?"
-					url: "http://img-to-json.maxnov.com/?callback=?",
-					// Specify the URL of the image
-					data: { url: escape("http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1") },
-					// Callback on success (NB: jQuery doesn"t natively support error callbacks for the json dataType)
-					success: function(data) {
+				<h3 id="example-no-plugin" class="sub">Example request without the plugin:<a href="#example-no-plugin" class="pilcrow" title="Permalink to this section">&para;</a></h3>
+				<pre class="brush: js">
+					// Create an AJAX request
+					$.ajax({
+						type: "GET",
+						dataType: "json",
+						// Query the server with a callback of "?"
+						url: "http://img-to-json.maxnov.com/?callback=?",
+						// Specify the URL of the image
+						data: { url: escape("http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1") },
+						// Callback on success (NB: jQuery doesn"t natively support error callbacks for the json dataType)
+						success: function(data) {
 
-						// Create empty image
-						var image = new Image();
+							// Create empty image
+							var image = new Image();
 
-						// When the image has loaded
-						$(image).load(function(e){
+							// When the image has loaded
+							$(image).load(function(e){
 
-							// For the example, just adding image to the page
-							$(this).attr('width', image.width);
-							$(this).attr('height', image.height);
-							$('body').append(this);
+								// For the example, just adding image to the page
+								$(this).attr('width', image.width);
+								$(this).attr('height', image.height);
+								$('body').append(this);
 
-						}).attr('src',data.data); // Set the image source as the image data to start it loading
+							}).attr('src',data.data); // Set the image source as the image data to start it loading
 
-					}
-				});</pre>
+						}
+					});</pre>
 				
-			<h3 id="server-http-codes">Server HTTP status codes<a href="#server-http-codes" class="pilcrow" title="Permalink to this section">&para;</a></h3>
-			<p>
-				If the your request fails for whatever reason, the server will respond with the following <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="more" data-target="external">HTTP status codes</a>:
-			</p>
-			<div class="spec">
-				<h4>400 - Bad Request</h4>
+				<h3 id="server-http-codes" class="sub">Server HTTP status codes<a href="#server-http-codes" class="pilcrow" title="Permalink to this section">&para;</a></h3>
 				<p>
-					This is usually because of a invalid URL has been sent or no URL has been sent.
+					If the your request fails for whatever reason, the server will respond with the following <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="more" data-target="external">HTTP status codes</a>:
 				</p>
-			</div>
-			<div class="spec">
-				<h4>413 - Request Entity Too Large</h4>
-				<p>
-					The image you are trying to fetch is too large. The limit for image size is 1MB.
-				</p>
-			</div>
-			<div class="spec">
-				<h4>415 - Unsupported Media Type</h4>
-				<p>
-					The type of the URL you are requesting is not supported by the server.
-				</p>
-			</div>
-			<div class="spec no-border">
-				<h4>XXX - Anything else</h4>
-				<p>
-					If any other status code is sent, this is forwarded from the server that hosts the image.
-				</p>
-			</div>
+				<div class="spec">
+					<h4>400 - Bad Request</h4>
+					<p>
+						This is usually because of a invalid URL has been sent or no URL has been sent.
+					</p>
+				</div>
+				<div class="spec">
+					<h4>413 - Request Entity Too Large</h4>
+					<p>
+						The image you are trying to fetch is too large. The limit for image size is 1MB.
+					</p>
+				</div>
+				<div class="spec">
+					<h4>415 - Unsupported Media Type</h4>
+					<p>
+						The type of the URL you are requesting is not supported by the server.
+					</p>
+				</div>
+				<div class="spec no-border">
+					<h4>XXX - Anything else</h4>
+					<p>
+						If any other status code is sent, this is forwarded from the server that hosts the image.
+					</p>
+				</div>
+			</section>
 		</section>
 		<div class="hr"><hr></div>
 		<section id="notes">
