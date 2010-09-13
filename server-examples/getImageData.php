@@ -54,10 +54,10 @@ try {
 		
 			// Setup the return data
 			$return_arr = array(
-													'width'=> $width,
-													'height'=> $height,
-													'data'=> $data_url
-													);
+				'width'=> $width,
+				'height'=> $height,
+				'data'=> $data_url
+			);
 													
 			// Encode it into JSON
 			$return_val = json_encode($return_arr);
