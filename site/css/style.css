@@ -1,0 +1,349 @@
+/* Fonts */
+@font-face {
+  font-family: 'Cantarell';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Cantarell'), url('http://themes.googleusercontent.com/font?kit=Yir4ZDsCn4g1kWopdg-ehPesZW2xOQ-xsNqO47m55DA') format('truetype');
+}
+@font-face {
+  font-family: 'Cantarell';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Cantarell'), url('http://themes.googleusercontent.com/font?kit=tGao7ZPoloMxQHxq-2oxNA') format('truetype');
+}
+@font-face {
+  font-family: 'OFL Sorts Mill Goudy TT';
+  font-style: normal;
+  font-weight: normal;
+  src: local('OFL Sorts Mill Goudy TT'), url('http://themes.googleusercontent.com/font?kit=9ZZVVBRCceNnPBXqWLH8IOLhrilDyef6adyH-Bknj3c') format('truetype');
+}
+
+
+/* Reset */
+html,
+body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,figure,footer,header,hgroup,menu,nav,section,menu,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}article,aside,figure,footer,header,hgroup,nav,section{display:block;}a{margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;background:transparent;}table{border-collapse:collapse;border-spacing:0;}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0;}input,select{vertical-align:middle;}body{font:13px arial,helvetica,"Nimbus Sans L","Bitstream Vera Sans",sans-serif;*font-size:small;*font:x-small;line-height:1.22;}table{font-size:inherit;font:100%;}select,input,textarea{font:99% arial,helvetica,"Nimbus Sans L","Bitstream Vera Sans",sans-serif;}code,pre{font-family:"Courier New",monospace,serif;font-size:1em;}body,select,input,textarea{color:#444;}h1,h2,h3,h4,h5,h6{font-weight:bold;text-rendering:optimizeLegibility;}html{-webkit-font-smoothing:antialiased;}a:active{outline:none;}a:focus{outline:thin dotted;}a,a:active,a:visited{color:#607890;}a:hover{color:#036;}ul{margin-left:30px;}td,td img{vertical-align:top;}sup{vertical-align:super;font-size:smaller;}pre{padding:15px;white-space:pre;white-space:pre-wrap;white-space:pre-line;word-wrap:break-word;}::-moz-selection{text-shadow:none;}::selection{text-shadow:none;}html{overflow-y:scroll;}button{width:auto;overflow:visible;}.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}.clearfix{display:inline-block;}* html .clearfix{height:1%;}/* Hides from IE-mac \*/ .clearfix{display:block;}
+
+/* Main styles */
+html, body {
+	width:100%;
+	height:100%;
+}
+
+body { 
+	font-family: Cantarell, Arial, sans-serif; 
+	width:960px; 
+	margin:20px auto; 
+	position:static;
+}
+body.light {
+	background-color:#ddd; 
+	color:#666;
+}
+body.dark {
+	background-color:#666; 
+	color:#ddd;
+}
+
+.dark a {
+	color:#8bc7ee;
+}
+
+a.more {
+	cursor:help;
+	color:#666;
+	text-decoration:none;
+	border-bottom:1px dotted #666;
+}
+.dark a.more {
+	color:#ddd;
+	border-bottom:1px dotted #ddd;
+}
+
+h1, h2, h3 {
+	font-family: 'OFL Sorts Mill Goudy TT', Georgia, serif; 
+	font-weight:normal;
+}
+h1 { 
+	font-size:3em;
+}
+h2 {
+	font-size:2em;
+}
+h3 {
+	font-size:1.5em;
+	margin-top:16px;
+}
+p {
+	line-height:1.5;
+}
+
+.light ::-moz-selection { background:#ccc; }
+.light ::selection { background:#ccc; }
+.light a:link { -webkit-tap-highlight-color:#ccc; }
+.dark ::-moz-selection { background:#888; }
+.dark ::selection { background:#888; }
+.dark a:link { -webkit-tap-highlight-color:#888; }
+
+/* The colour changer showing the moon or sun */
+#change-colour {
+	width:16px;
+	height:16px;
+	position:absolute;
+	top:10px;
+	right:10px;
+	cursor:pointer;
+}
+/*
+Icons: Flat Weather Icons by LavAna (http://lavana.deviantart.com/)
+Source: http://lavana.deviantart.com/art/Flat-Weather-Icons-32021664
+*/
+.light #change-colour {
+	background:url("http://media.maxnov.com/getimagedata/img/colour-moon.png");
+}
+.dark #change-colour {
+	background:url("http://media.maxnov.com/getimagedata/img/colour-sun.png");
+}
+
+/* Nav & button styles */
+nav {
+	clear:both;
+	margin-top:22px;
+}
+nav .button {
+	float:left;
+	margin:10px 5px;
+	padding:0px 9px;
+	display: block;
+	height: 22px;
+	font-size:0.9em;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+  -moz-border-radius: 3px 3px 3px 3px !important;
+  -webkit-border-radius: 3px 3px 3px 3px !important;
+	
+}
+nav .button a {
+	text-decoration:none;
+}
+.button:first-child {
+	margin-left:0px !important;
+}
+.button:last-child {
+	margin-right:0px !important;
+}
+
+/* Button colours: Light */
+.light nav .button {
+	border: 1px solid #bbb;
+	background-color: #dedede;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#dedede');
+	background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#dedede));
+	background: -moz-linear-gradient(top,#fff,#dedede);
+}
+.light nav .button a {
+	color:#000;
+}
+.light nav .button:hover {
+	border-color: #999
+}
+.light nav .button:active {
+	border-color: #ccc;
+	background-color: #fff;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dedede', endColorstr='#fff');
+	background: -webkit-gradient(linear,left top,left bottom,from(#dedede),to(#fff));
+	background: -moz-linear-gradient(top,#dedede,#fff);
+}
+
+/* Button colours: Dark */
+.dark nav .button {
+	border: 1px solid #999;
+	background-color: #ddd;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ddd', endColorstr='#aaa');
+	background: -webkit-gradient(linear,left top,left bottom,from(#ddd),to(#aaa));
+	background: -moz-linear-gradient(top,#ddd,#aaa);
+}
+.dark nav .button a {
+	color:#000;
+}
+.dark nav .button:hover {
+	border-color: #bbb
+}
+.dark nav .button:active {
+	border-color: #ccc;
+	background-color: #aaa;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaa', endColorstr='#ddd');
+	background: -webkit-gradient(linear,left top,left bottom,from(#aaa),to(#ddd));
+	background: -moz-linear-gradient(top,#aaa,#ddd);
+}
+
+/* Horizontal rule */
+.hr {
+	width:850px;
+	height:13px;
+	margin:25px auto 10px auto;
+}
+.dark .hr {
+	background-image:url("http://media.maxnov.com/getimagedata/img/hr-dark.png");
+}
+.light .hr {
+	background-image:url("http://media.maxnov.com/getimagedata/img/hr-light.png");
+}
+.hr hr {
+	display:none;
+}
+
+/* Sections */
+section {
+	padding-top:15px;
+}
+
+/* First paragrpah has more top margin */
+#about h2 {
+	margin-top:17px;
+}
+
+.view-demo {
+	margin:5px 0px;
+}
+
+/* The paragraph tag that appears next to each heading */
+section .pilcrow {
+	display:none;
+	margin-left:7px;
+	margin-top:10px;
+	font-size:0.6em;
+	font-family:sans-serif;
+	padding:5px;
+	text-decoration:none;
+}
+.light section .pilcrow {
+	color:#000;
+}
+.dark section .pilcrow {
+	color:#fff;
+}
+.light section .pilcrow:hover {
+	background-color:#ccc;
+}
+.dark section .pilcrow:hover {
+	background-color:#aaa;
+}
+
+/* The back to top link at the bottom of pages */
+.back-to-top {
+	text-align:right;
+	position:fixed; 
+	bottom:10px; 
+	right:10px;
+}
+
+/* Spec info */
+.spec {
+	margin:15px 0px;
+	padding:10px;
+}
+.light .spec {
+	border-bottom:1px solid #aaa;
+	border-top:1px solid #aaa;
+	background-color:#efefef;
+}
+.dark .spec {
+	border-bottom:1px solid #ccc;
+	border-top:1px solid #ccc;
+	background-color:#4f4f4f;
+}
+.spec h4 {
+/*	display:inline;*/
+	float:left;
+	width:50%;
+	margin-bottom:5px;
+}
+.spec .type {
+	float:right;
+	width:50%;
+	text-align:right;
+	font-style:italic;
+}
+.spec p {
+	clear:both;
+}
+
+/* Highlighting for inline code */
+.light span.code {
+	background-color:#ccc;
+	color:#555;
+/*	padding:2px;*/
+	font-family:courier, monospace;
+}
+.dark span.code {
+	background-color:#888;
+	color:#eee;
+/*	padding:2px;*/
+	font-family:courier, monospace;
+}
+
+/* Footer */
+footer {
+	width:960px;
+	margin:50px 0px 50px 0px;
+	text-align:center;
+}
+footer img {
+	vertical-align:middle;
+}
+
+/* Disqus styling */
+#dsq-content .dsq-moderator .dsq-comment-header {
+	background:none !important;
+}
+
+
+/* Print and mobile */
+@media print {
+  * { background: transparent !important; color: #444 !important; text-shadow: none; }
+
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+
+  a:after { content: " (" attr(href) ")"; } 
+
+  abbr:after { content: " (" attr(title) ")"; }
+  
+  .ir a:after { content: ""; }  /* Don't show links for images */
+  
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  
+  img { page-break-inside: avoid; }
+
+  @page { margin: 0.5cm; }
+
+  p, h2, h3 { orphans: 3; widows: 3; }
+
+  h2, h3{ page-break-after: avoid; }
+}
+
+
+
+/*
+ * Media queries for responsive design
+ */
+
+@media all and (orientation:portrait) { 
+  /* Style adjustments for portrait mode goes here */
+  
+}
+
+@media all and (orientation:landscape) { 
+  /* Style adjustments for landscape mode goes here */
+  
+}
+
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
+   Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width: 480px) {
+  
+  
+  /* Prevent iOS, WinMobile from adjusting font size */
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } 
+}
+

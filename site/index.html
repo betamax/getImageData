@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>$.getImageData</title>
+	  <meta name="description" content="A service and jQuery plugin that enables you to edit images from other domains using the canvas tag.">
+	  <meta name="author" content="Max Novakovic">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+		<!--[if IE]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="http://media.maxnov.com/getimagedata/min/g=css" rel="stylesheet" type="text/css">
+		<link href="http://media.maxnov.com/getimagedata/min/g=theme" rel="stylesheet" type="text/css" id="theme">
+		<!-- <link href="css/style.css" rel="stylesheet" type="text/css">
+		<link href="css/shCore.css" rel="stylesheet" type="text/css">
+		<link href="css/shThemeDefault.css" id="syntax-style" rel="stylesheet" type="text/css"> -->
+	</head>
+	
+	<body class="light">
+		
+		<div class="back-to-top"><a href="#"> &#9652; Back to top</a></div>
+		
+		<div id="change-colour"></div>
+		<header>
+			<h1>$.getImageData</h1>
+			<p>
+				A tiny jQuery plugin that, in conjunction with a Google App Engine back-end, allows cross-domain getImageData with the HTML5 Canvas.
+			</p>
+		</header>
+		
+		<nav class="clearfix">
+			<div class="button"><a href="#about">About</a></div>
+			<div class="button"><a href="#download">Download</a></div>
+			<div class="button"><a href="#installation">Installation</a></div>
+			<div class="button"><a href="#how-to-use">How To Use</a></div>
+			<div class="button"><a href="#examples">Examples</a></div>
+			<div class="button"><a href="#technical-specification">Technical Spec.</a></div>
+			<div class="button"><a href="#server-specification">Server Spec.</a></div>
+			<div class="button"><a href="#notes">Notes</a></div>
+			<div class="button"><a href="#attributions">Attributions</a></div>
+			<div class="button"><a href="#license">License</a></div>
+			<div class="button"><a href="#comments">Comments</a></div>
+		</nav>
+		
+		<section id="about">
+		<h2>About<a href="#about" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+		<p>
+			$.getImageData allows anyone to get an image from another domain and have pixel level access to it using the <span class="code">getImageData()</span> method. It works by sending a request with the URL of the image to google's servers via the <a href="http://code.google.com/appengine/" class="more">Google App Engine</a><sup><a href="#note-1">1</a></sup>. The server then converts the image into base64 encoded <a href="http://en.wikipedia.org/wiki/Data_URI_scheme" class="more">data URL</a> and sends the image back as a JSON object. This means that the image can be locally included on the website and therefore it can be edited by the <span class="code">canvas</span> tag.
+		</p>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="download">
+			<h2>Download<a href="#download" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				<a href="jquery.getimagedata.min.js">Click here to download the current version of $.getImageData</a> (2.5 KB, minified). Or download the uncompressed source code <a href="jquery.getimagedata.js">here</a> (3.5 KB).
+			</p>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="installation">
+			<h2>Installation<a href="#installation" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				Once you have <a href="#download">downloaded</a> $.getImageData, you need to do the following; Include jQuery and the $.getImageData source in your HTML document right before the last <span class="code">body</span> tag, like this:
+			</p>
+			<pre class="brush: xml">
+				&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
+				&lt;script src="js/jquery.getimagedata.min.js"&gt;&lt;/script&gt;
+			&lt;/body&gt;</pre>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="how-to-use">
+			<h2>How to use<a href="#how-to-use" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				Once you have installed the plugin, you are ready to call the $.getImageData function. The function expects one parameter which must be an object consisting of three properties: <span class="code">url</span>, <span class="code">success</span> and <span class="code">error</span>. <span class="code">url</span> is a string containing the URL of the image you are trying to fetch. <span class="code">success</span> and <span class="code">error</span> are callback functions that are called on successful fetching of the image or failure.
+			</p>
+			<pre class="brush: js">
+			$.getImageData({
+				url: "http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1",
+				success: function(image){
+					// Do something with the now local version of the image
+				},
+				error: function(xhr, text_status){
+					// Handle your error here
+				}
+			});</pre>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="examples">
+			<h2>Examples<a href="#examples" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<h3 id="examples-1">Getting an image from another domain and then inverting it<a href="#examples-1" class="pilcrow" title="Permalink to this section">&para;</a></h3>
+			<h4 class="view-demo"><a href="./example-1.html">View demo</a></h4>
+			<p>
+				In the example below, the image (<a href="http://www.flickr.com/photos/anniemole/2758349058/">London Skyline from Altitude 6</a> by <a href="http://www.flickr.com/photos/anniemole/">Annie Mole</a>) is specified as the <span class="code">url</span> property. The <span class="code">success</span> property is a function that receives one argument, which is the requested image. This callback is called once the image has been loaded locally into the DOM. This means that it can now be put on to the canvas and <span class="code">getImageData</span> can be used on it.
+			</p>
+			<pre class="brush: js">
+			$.getImageData({
+				url: "http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1",
+				success: function(image){
+
+					// Set up the canvas
+					var can = document.getElementsByTagName('canvas')[0];
+					var ctx = can.getContext('2d');
+
+					// Set the canvas width and heigh to the same as the image
+					$(can).attr('width', image.width);
+					$(can).attr('height', image.height);
+
+					// Draw the image on to the canvas
+					ctx.drawImage(image, 0, 0, image.width, image.height);
+
+					// Get the image data
+					var image_data = ctx.getImageData(0, 0,  image.width, image.height);
+					var image_data_array = image_data.data;
+
+					// Invert every pixel
+					for (var i = 0, j = image_data_array.length; i &lt; j; i+=4) {
+						image_data_array[i] = 255 - image_data_array[i];
+						image_data_array[i+1] = 255 - image_data_array[i+1];
+						image_data_array[i+2] = 255 - image_data_array[i+2];
+					}
+
+					// Write the image data to the canvas
+					ctx.putImageData(image_data, 0, 0);
+
+				},
+				error: function(xhr, text_status){
+					// Handle your error here
+				}
+			});</pre>
+			<br />
+			<br />
+			<h3 id="examples-2">Loading images from flickr and analysing the colour<a href="#examples-2" class="pilcrow" title="Permalink to this section">&para;</a></h3>
+			<h4 class="view-demo"><a href="./example-2.html">View demo</a></h4>
+			<p>
+				This example loads photos from the <a href="http://www.flickr.com/services/feeds/docs/photos_public/" class="more">flickr public feed</a>. It then takes those images and fetches them using $.getImageData so their data can be read using the canvas. The data is then averaged to get the average colour in each images. The images are then added to the page with their average colour displayed next to them. This is an example of the beginning of an interesting mashup that could be achieved by using flickr as a source of images.
+			</p>
+			<pre class="brush: js">
+			// Get the flickr stream
+			$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=colour&amp;tagmode=any&amp;format=json&amp;jsoncallback=?", 
+			function(data){
+         
+				// For each image
+				$.each(data.items, function(i,item){
+					$.getImageData({
+						url: item.media.m, // This is the URL of the flickr image
+						success: analyseAndDraw, // Run this function when image has been fetched
+						error: function(xhr, text_status){
+							// Handle your error here
+						}
+					});
+				});
+
+			});
+			
+			// This creates a canvas, draws the image on to it, gets the average colour of the image and then adds 
+			// the image to the DOM with the average colour as a background colour to its container
+			function analyseAndDraw(image) {
+				// Create the canvas and context
+				var can = document.createElement('canvas');
+				var ctx = can.getContext('2d');
+				
+				// Set the canvas dimensions
+				$(can).attr('width', image.width);
+				$(can).attr('height', image.height);
+				
+				// Draw the image to the canvas
+				ctx.drawImage(image, 0, 0, image.width, image.height);
+				
+				// Get the image data
+				var image_data = ctx.getImageData(0, 0,  image.width, image.height);
+				var image_data_array = image_data.data;
+				var image_data_array_length = image_data_array.length;
+				
+				// Array to hold the average totals
+				var a=[0,0,0];
+			
+				// Accumulate the pixel colours
+				for (var i = 0; i &lt; image_data_array_length; i += 4){
+					a[0]+=image_data_array[i];
+					a[1]+=image_data_array[i+1];
+					a[2]+=image_data_array[i+2];
+				}
+
+				// Divide by number total pixels
+				a[0] = Math.round(a[0]/=(image_data_array_length/3)); // R
+				a[1] = Math.round(a[1]/=(image_data_array_length/3)); // G
+				a[2] = Math.round(a[2]/=(image_data_array_length/3)); // B
+				
+				// Create the container, set its background colour and add it to the DOM
+				var imageContainer = $('<div style="background-color:rgb('+a[0]+','+a[1]+','+a[2]+')"></div>');
+				$(".images").append(imageContainer);
+				
+				// Insert the image to the container
+				$(imageContainer).append(image);
+			}</pre>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="technical-specification">
+			<h2>Technical Specification<a href="#technical-specification" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				The main function that $.getImageData provides is the server-side image fetching. This is done using a Django project hosted on the <a href="http://code.google.com/appengine/" class="more">Google App Engine</a><sup><a href="#note-1">1</a></sup>. It is a very simple project and could easily be recreated in PHP or any server-side language. The purpose of $.getImageData is to enable people to get images across domains without the need for any server-side code.
+			</p>
+			<br />
+			<p>
+				$.getImageData consists of one function that uses the <a href="http://code.google.com/p/jquery-jsonp/" class="more">jQuery JSONP Core Plugin</a> (written by Julian Aubourg) which is packaged with this plugin. The reason for using this JSONP plugin is so that an error callback can be called if the server does not return an image for whatever reason. As mentioned <a href="#how-to-use">above</a>, initialising the plugin is very similar to calling <a href="http://api.jquery.com/jQuery.getJSON/" class="more">getJSON</a>:
+			</p>
+			<pre class="brush: js">
+				$.getImageData({
+					url, 
+					success: callback(image){}, 
+					error: callback(xhr, text_status){}
+				});</pre>
+			<div class="spec">
+				<h4>url</h4>
+				<span class="type">String</span>
+				<p>
+					The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+				</p>
+			</div>
+			<div class="spec">
+				<h4>success: callback(image)</h4>
+				<span class="type">Function</span>
+				<p>
+					This function is called on successful fetching of the requested image. It receives one argument which is an Image() object that consists of the image and it's width and height as the properties <span class="code">width</span> and <span class="code">height</span>.
+				</p>
+			</div>
+			<div class="spec">
+				<h4>error: callback(xhr, text_status, error_throwdown)</h4>
+				<span class="type">Function</span>
+				<p>
+					This function is called if the server returns an error code or takes more than 10 seconds (10000 ms) to execute. It receives two arguments which are <span class="code">xhr</span>: the XMLHttpRequest and <span class="code">text_status</span>: the status returned by the server (usually <span class="code">error</span> or <span class="code">no_url</span>).
+				</p>
+			</div>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="server-specification">
+			<h2>Server Specification<a href="#server-specification" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				$.getImageData provides a simple wrapper around the server-side code that allows callbacks to be added when the image has been loaded or if it fails. You can, however, directly query the server and get the same result. The server addresses are:
+			</p>
+			<pre class="brush: xml">
+			http://img-to-json.maxnov.com/</pre>
+			<p>
+				And for secure requests:
+			</p>
+			<pre class="brush: xml">
+			https://img-to-json.appspot.com/</pre>
+			<p>
+				The call to the server can be made using an XMLHttpRequest to one of the above URLs. The server expects two things:
+			</p>
+			<div class="spec">
+				<h4>url</h4>
+				<span class="type">String</span>
+				<p>
+					The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+				</p>
+			</div>
+			<div class="spec no-border">
+				<h4>callback</h4>
+				<span class="type">String</span>
+				<p>
+					The callback function to be called on server response. Default should be ?. This is to enable cross-domain JSON serving.
+				</p>
+			</div>
+			<p>
+				The server will respond with a JSON object consisting of <span class="code">data</span>: the image data as a base64 encoded data URL, <span class="code">width</span>: the width of the image and <span class="code">height</span>: the height of the image.
+			</p>
+			
+			<h3 id="example-no-plugin">Example request without the plugin:<a href="#example-no-plugin" class="pilcrow" title="Permalink to this section">&para;</a></h3>
+			<pre class="brush: js">
+				// Create an AJAX request
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					// Query the server with a callback of "?"
+					url: "http://img-to-json.maxnov.com/?callback=?",
+					// Specify the URL of the image
+					data: { url: escape("http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1") },
+					// Callback on success (NB: jQuery doesn"t natively support error callbacks for the json dataType)
+					success: function(data) {
+
+						// Create empty image
+						var image = new Image();
+
+						// When the image has loaded
+						$(image).load(function(e){
+
+							// For the example, just adding image to the page
+							$(this).attr('width', image.width);
+							$(this).attr('height', image.height);
+							$('body').append(this);
+
+						}).attr('src',data.data); // Set the image source as the image data to start it loading
+
+					}
+				});</pre>
+				
+			<h3 id="server-http-codes">Server HTTP status codes<a href="#server-http-codes" class="pilcrow" title="Permalink to this section">&para;</a></h3>
+			<p>
+				If the your request fails for whatever reason, the server will respond with the following <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="more">HTTP status codes</a>:
+			</p>
+			<div class="spec">
+				<h4>400 - Bad Request</h4>
+				<p>
+					This is usually because of a invalid URL has been sent or no URL has been sent.
+				</p>
+			</div>
+			<div class="spec">
+				<h4>413 - Request Entity Too Large</h4>
+				<p>
+					The image you are trying to fetch is too large. The limit for image size is 1MB.
+				</p>
+			</div>
+			<div class="spec">
+				<h4>415 - Unsupported Media Type</h4>
+				<p>
+					The type of the URL you are requesting is not supported by the server.
+				</p>
+			</div>
+			<div class="spec no-border">
+				<h4>XXX - Anything else</h4>
+				<p>
+					If any other status code is sent, this is forwarded from the server that hosts the image.
+				</p>
+			</div>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="notes">
+			<h2>Notes<a href="#notes" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				<sup id="note-1">1</sup> Google app engine is free to use up to a point. If the daily usage exceeds their preset limits then the plugin won't work until the next day.
+			</p>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="attributions">
+			<h2>Attributions<a href="#attributions" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<ul>
+				<li><a href="http://www.jquery.com/">jQuery</a> was used to develop this plugin and it is required to use this plugin.</li>
+				<li><a href="http://code.google.com/p/jquery-jsonp/">jQuery JSONP Core Plugin</a> created by <a href="http://www.jaubourg.net/">Julian Aubourg</a> is packaged with this plugin.</li>
+				<li><a href="http://www.djangoproject.com/">Django</a> powers the server-side aspect of the plugin.</li>
+				<li><a href="http://code.google.com/appengine/">Google App Engine</a> hosts the server-side code.</li>
+				<li><a href="http://www.disturbmedia.com/">Disturb Media</a> - made in associated with.</li>
+			</ul>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="license">
+			<h2>License<a href="#license" class="pilcrow" title="Permalink to this section">&para;</a></h2>
+			<p>
+				The plugin is licensed in the same way as <a href="http://jquery.org/license">jQuery is</a>: a dual MIT and GPL license. You can choose which license suits you best. For more information, please see:
+			</p>
+			<ul>
+				<li>
+					<a href="MIT-License.txt">MIT License</a> (<a href="http://en.wikipedia.org/wiki/MIT_License">More Information</a>)
+				</li>
+				<li>
+					<a href="GPL-License.txt">GPL</a> (<a href="http://en.wikipedia.org/wiki/GNU_General_Public_License">More Information</a>)
+				</li>
+			</ul>
+		</section>
+		<div class="hr"><hr></div>
+		<section id="comments">
+			<h2>Comments</h2>
+			<div id="disqus_thread"></div>
+			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=getimagedata">comments</a>.</noscript>
+		</section>
+		<div class="hr"><hr></div>
+		
+		<footer>
+			$.getImageData was created by <a href="http://www.maxnov.com/">Max Novakovic</a> in association with 
+			<a href="http://www.disturbmedia.com/" title="Disturb Media"><img src="http://media.maxnov.com/getimagedata/img/disturb-light.png" width="98" height="24" alt="Disturb Media" id="disturb-logo"></a>
+		</footer>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script src="http://media.maxnov.com/getimagedata/min/?g=js"></script>
+		<script>
+			// Google tracking code
+			var a=a||[];a.push(["_setAccount","UA-18323541-1"]);a.push(["_trackPageview"]);var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);
+		</script>
+	</body>
+</html>

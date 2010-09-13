@@ -1,0 +1,98 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>
+	<meta charset="utf-8" />  
+	<!--[if IE]><![endif]-->
+	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+	
+	<title></title>
+  <meta name="description" content="">
+  <meta name="author" content="Max Novakovic">
+	
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="stylesheet" href="css/style.css">
+</head>  
+<body>
+ 	
+	<div id="response">
+	</div>
+	<canvas></canvas>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script>!window.jQuery && document.write('<script src="js/jquery-1.4.2.min.js"><\/script>')</script>
+	<script src="js/jquery.getimagedata.js"></script>
+	<script>
+		
+		// Create an AJAX request
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			// Query the server with a callback of '?'
+			url: "http://img-to-json.maxnov.com/?callback=?",
+			// Specify the URL of the image
+			data: { url: escape("http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1") },
+			// Callback on success (NB: jQuery doesn't natively support error callbacks for the json dataType)
+			success: function(data) {
+				
+				// Create empty image
+				var image = new Image();
+				
+				// When the image has loaded
+				$(image).load(function(e){
+					
+					// For the example, just adding image to the page
+					$(this).attr("width",image.width);
+					$(this).attr("height",image.height);
+					$("body").append(this);
+					
+				}).attr("src",data.data); // Set the image source as the image data to start it loading
+				
+			}
+		});
+		
+		
+		// $(function(){
+		// 			
+		// 			var url = "http://i.imgur.com/vJSga.jpg"; // Many
+		// 			// var url = "http://imgur.com/md7nu.jpg"; // One
+		// 			// var url = "http://imgur.com/AewvW.jpg" // standing
+		// 			var url = "http://imgur.com/uzmyo.png";
+		// 			
+		// 			
+		// 			$.getImageData({
+		// 				url: "http://imgur.com/ssssuzmyo.png",
+		// 				success: function(image){
+		// 				
+		// 					var can = document.getElementsByTagName('canvas')[0];
+		// 					var ctx = can.getContext('2d');
+		// 				
+		// 					$(can).attr("width", image.width);
+		// 					$(can).attr("height", image.height);
+		// 				
+		// 					ctx.drawImage(image, 0, 0, image.width, image.height);
+		// 					
+		// 					var image_data = ctx.getImageData(0, 0,  image.width, image.height);
+		// 					var image_data_array = image_data.data;
+		// 					
+		// 					for (var i = 0, j = image_data_array.length; i < j; i+=4) {
+		// 						image_data_array[i]   = 255 - image_data_array[i];
+		// 						image_data_array[i+1] = 255 - image_data_array[i+1];
+		// 						image_data_array[i+2] = 255 - image_data_array[i+2];
+		// 				  }
+		// 					
+		// 					ctx.putImageData(thisImageData, 0, 0);
+		// 					
+		// 				},
+		// 				error: function(xhr, text_status, error_throwdown){
+		// 					// Handle your error here
+		// 					console.log(text_status, error_throwdown);
+		// 				}
+		// 			});
+		// 
+		// 		});
+	</script>
+	<!--[if lt IE 7 ]><script src="js/dd_belatedpng.js?v=1"></script><![endif]-->
+</body>
+</html>
