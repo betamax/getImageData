@@ -11,6 +11,7 @@ For detailed usage instructions and examples please see: [http://www.maxnov.com/
 To Do
 -----
 
+ * Add information about specifying a custom server using the `server` parameter.
  * Add information about the server examples to the website.
  * Add more server examples - the more the better!
  * Add fallback servers so if the Google App Engine is down for whatever reason (quota exceeded) then it can fallback to one of them - **Please let me know if you can host one**.
