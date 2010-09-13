@@ -31,7 +31,7 @@
 		
 		<footer>
 			$.getImageData was created by <a href="http://www.maxnov.com/">Max Novakovic</a> in association with 
-			<a href="http://www.disturbmedia.com/" title="Disturb Media"><img src="http://media.maxnov.com/getimagedata/img/disturb-white.png" width="98" height="24" alt="Disturb Media" id="disturb-logo"></a>
+			<a href="http://www.disturbmedia.com/" title="Disturb Media" data-target="external"><img src="http://media.maxnov.com/getimagedata/img/disturb-white.png" width="98" height="24" alt="Disturb Media" id="disturb-logo"></a>
 		</footer>
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -85,6 +85,14 @@
 			});
 			
 		});
+		</script>
+		
+		<script>
+			// To open links in new window
+			$('a[data-target="external"]').click(function(e){
+				window.open($(this).attr("href"));
+				return false;
+			});
 		</script>
 	</body>
 </html>
