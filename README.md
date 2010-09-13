@@ -1,7 +1,6 @@
 $.getImageData
 ==============
-Version 0.2
------------
+*Version: 0.2*
 
 $.getImageData allows anyone to get an image from another domain and have pixel level access to it using the getImageData() method. It works by sending a request with the URL of the image to google's servers via the Google App Engine. The server then converts the image into base64 encoded data URL and sends the image back as a JSON object. This means that the image can be locally included on the website and therefore it can be edited by the canvas tag.
 
