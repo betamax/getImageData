@@ -62,12 +62,12 @@ Hooking it up to $.getImageData
 Using $.getImageData all you need to do to connect it to the node server is change the server parameter when initialising the plugin like so:
 
     $.getImageData({
-		  url: "http://www.google.co.uk/images/logos/ps_logo2.png", 
-			server: "http://127.0.0.1:3000/"
-		  success: callback(image){
+      url: "http://www.google.co.uk/images/logos/ps_logo2.png", 
+      server: "http://127.0.0.1:3000/"
+      success: callback(image){
 			
-			}
-		});
+      }
+    });
 
 
 Changelog
