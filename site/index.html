@@ -48,7 +48,7 @@
 		<section id="about">
 		<h2>About<a href="#about" class="pilcrow" title="Permalink to this section">&para;</a></h2>
 		<p>
-			$.getImageData allows anyone to get an image from another domain and have pixel level access to it using the <span class="code">getImageData()</span> method. It works by sending a request with the URL of the image to google's servers via the <a href="http://code.google.com/appengine/" class="more" data-target="external">Google App Engine</a><sup><a href="#note-1">1</a></sup>. The server then converts the image into base64 encoded <a href="http://en.wikipedia.org/wiki/Data_URI_scheme" class="more" data-target="external">data URL</a> and sends the image back as a JSON object. This means that the image can be locally included on the website and therefore it can be edited by the <span class="code">canvas</span> tag.
+			This project is aimed at developers who don't have the ability, don't want to or don't have time to create a proxy script on their server to get images from different domains or origins. It enables pixel level access to images from different origins. It works by sending a JSONP request with the URL of the image to Google's servers via the <a href="http://code.google.com/appengine/" class="more" data-target="external">Google App Engine</a><sup><a href="#note-1">1</a></sup>. The server then converts the image into base64 encoded <a href="http://en.wikipedia.org/wiki/Data_URI_scheme" class="more" data-target="external">data URL</a> and sends the image back as a JSON object. This means that the image can be locally included on the website and therefore it can be edited by the <span class="code">canvas</span> tag.
 		</p>
 		</section>
 		<div class="hr"><hr></div>
