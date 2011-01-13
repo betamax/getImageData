@@ -20,9 +20,9 @@ As a dependency to the gm module, you will need to install [GraphicsMagick][grap
 
 To download the server, you can run this command:
 
-    git clone https://github.com/betamax/getImageData/tree/master/server-examples/node
+    git clone git://github.com/betamax/getImageData.git
 
-Alternatively, you can download the project from github using the download button.
+Note: this will download all the files from the project. Alternatively, you can download the project from github using the download button.
 
 I *hope* that all the dependencies of the project are included with the server however, if they are not then this is the list of them:
 
@@ -30,7 +30,6 @@ I *hope* that all the dependencies of the project are included with the server h
  * [bufferlist][bufferlist_link]
  * [gm][gm_link]
  * [connect][connect_link]
- * [http][http_link]
 
 If you have npm installed then you can install each one by running:
 
