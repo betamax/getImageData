@@ -1,7 +1,9 @@
 $.getImageData: Node.js server
 ==============
 
-This is an implementation of the Google App Engine server using Node.js. 
+This is an implementation of the Google App Engine server using Node.js. For information about how the server work, please look at the [source code][server_source] because it is well commented.
+
+[server_source]: https://github.com/betamax/getImageData/blob/master/server-examples/node/server.js
 
 Requirements
 -----
