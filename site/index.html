@@ -211,6 +211,7 @@
 				<pre class="brush: js">
 					$.getImageData({
 						url, 
+						server,
 						success: callback(image){}, 
 						error: callback(xhr, text_status){}
 					});</pre>
@@ -219,6 +220,13 @@
 					<span class="type">String</span>
 					<p>
 						The URL of the image you want to fetch. Ideally PNG, JPEG or GIF, however, the server will accept other image types.
+					</p>
+				</div>
+				<div class="spec">
+					<h4>server</h4>
+					<span class="type">String</span>
+					<p>
+						This is optional. It is the URL of the server you want to get the image data. Please see <a href="#using-your-own-server">using your own server</a>
 					</p>
 				</div>
 				<div class="spec">
@@ -270,34 +278,42 @@
 					The server will respond with a JSON object consisting of <span class="code">data</span>: the image data as a base64 encoded data URL, <span class="code">width</span>: the width of the image and <span class="code">height</span>: the height of the image.
 				</p>
 			
-				<h3 id="example-no-plugin" class="sub">Example request without the plugin:<a href="#example-no-plugin" class="pilcrow" title="Permalink to this section">&para;</a></h3>
+				<h3 id="example-no-plugin" class="sub">Example request without the plugin or jQuery:<a href="#example-no-plugin" class="pilcrow" title="Permalink to this section">&para;</a></h3>
 				<pre class="brush: js">
-					// Create an AJAX request
-					$.ajax({
-						type: "GET",
-						dataType: "json",
-						// Query the server with a callback of "?"
-						url: "http://img-to-json.maxnov.com/?callback=?",
-						// Specify the URL of the image
-						data: { url: escape("http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1") },
-						// Callback on success (NB: jQuery doesn"t natively support error callbacks for the json dataType)
-						success: function(data) {
+					// Image to be fetched
+					var img_url = "http://farm4.static.flickr.com/3002/2758349058_ab6dc9cfdc_z.jpg?zz=1",
 
-							// Create empty image
-							var image = new Image();
+					// JSON callback function
+			    callback = "image_loaded_callback",
 
-							// When the image has loaded
-							$(image).load(function(e){
+					// URL of the server
+			    server_url = "//img-to-json.appspot.com/?url=" + escape(img_url) + "&callback=" + callback,
 
-								// For the example, just adding image to the page
-								$(this).attr('width', image.width);
-								$(this).attr('height', image.height);
-								$('body').append(this);
+					// Script container
+			    script = document.createElement('script');
 
-							}).attr('src',data.data); // Set the image source as the image data to start it loading
+					// Set the URL to the JSONP and then append to document
+			    script.src = server_url;
+			    document.body.appendChild(script);
 
-						}
-					});</pre>
+					// Callback function
+					function image_loaded_callback(data) {
+
+						// Create the image and set its src to the data URL
+						var image = new Image;
+						image.src = data.data;
+
+						// When the image has loaded
+						image.onload = function(){
+							// Set its width and height
+							image.width = data.width;
+							image.height = data.height;
+
+							// Insert it to the DOM (this is where you could put the image on to the canvas)
+							document.getElementById('image_container').appendChild(image);
+						};
+
+					}</pre>
 				
 				<h3 id="server-http-codes" class="sub">Server HTTP status codes<a href="#server-http-codes" class="pilcrow" title="Permalink to this section">&para;</a></h3>
 				<p>
@@ -332,13 +348,19 @@
 		<div class="hr"><hr></div>
 		<section id="using-your-own-server">
 			<h2>Using your own server<a href="#using-your-own-server" class="pilcrow" title="Permalink to this section">&para;</a></h2>
-			<p>This section is coming soon.</p>
+			<p>
+				If you don't want to rely on Google App Engine to server your images back as data URLs or if you would like to host a mirror server for use in the plugin then it is possible to run your own server. On GitHub in the <a href="https://github.com/betamax/getImageData/tree/master/server-examples">server-examples</a> folder you can find three different examples of the server written in Node.js, <a href="https://github.com/betamax/getImageData/blob/master/server-examples/getImageData.php">PHP</a> and <a href="https://github.com/betamax/getImageData/blob/master/server-examples/getImageData.py">Python</a>. 
+			</p>
+			<br />
+			<h4>For documentation on the Node.js server, <a href="https://github.com/betamax/getImageData/tree/master/server-examples/node" title="Documentation for $.getImageData Node.js server">please go here</a>.</h4>
+			<br />
+			<p>If you are willing to run a mirror of the Google App Engine project, please email me at max@maxnov.com.</p>
 		</section>
 		<div class="hr"><hr></div>
 		<section id="notes">
 			<h2>Notes<a href="#notes" class="pilcrow" title="Permalink to this section">&para;</a></h2>
 			<p>
-				<sup id="note-1">1</sup> Google app engine is free to use up to a point. If the daily usage exceeds their preset limits then the plugin won't work until the next day.
+				<sup id="note-1">1</sup> Google app engine is free to use up to a point. If the daily usage exceeds their preset limits then the plugin won't work until the next day. Unless you decide to <a href="#using-your-own-server">use your own server</a>.
 			</p>
 		</section>
 		<div class="hr"><hr></div>
