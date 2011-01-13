@@ -1,6 +1,6 @@
 '''
  '
- '  jQuery $.getImageData Plugin 0.2
+ '  jQuery $.getImageData Plugin 0.3
  '  http://www.maxnov.com/getimagedata
  '
  '  Written by Max Novakovic (http://www.maxnov.com/)
@@ -20,7 +20,7 @@
  '
  ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
  '
- '  Copyright 2010, Max Novakovic
+ '  Copyright 2011, Max Novakovic
  '  Dual licensed under the MIT or GPL Version 2 licenses.
  '  http://www.maxnov.com/getimagedata/#license
  '
