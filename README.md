@@ -13,7 +13,7 @@ To Do
 
  * Add more server examples - the more the better!
  * Add fallback servers so if the Google App Engine is down for whatever reason (quota exceeded) then it can fallback to one of them - **Please let me know if you can host one**.
- * More demos that show of a bit more what is possible *(Idea: 3D cube with images from Flickr on it)*.
+ * More demos that show of a bit more what is possible *(Idea:  <del>3D cube with images from Flickr on it</del>)*.
 
 Changelog
 ---------
