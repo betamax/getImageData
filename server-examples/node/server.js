@@ -61,7 +61,7 @@ app.get('/', function(req, res){
 				var mimetype = response.headers["content-type"];
 				if(mimetype == "image/gif" || mimetype == "image/jpeg" || 
 				   mimetype == "image/jpg" || mimetype == "image/png" || 
-				   mimetype == "image/tiff" ) {
+				   mimetype == "image/tiff") {
 					
 					// Create the prefix for the data URL
 					var type_prefix = "data:" + mimetype + ";base64,",
