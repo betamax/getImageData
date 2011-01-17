@@ -30,7 +30,7 @@
 	f=d("head")[0]||document.documentElement,q={},S=0,p,C={callback:L,url:location.href};x.setup=function(a){d.extend(C,a)};d.jsonp=x})(jQuery,setTimeout);
 
 	// jQuery getImageData Plugin
-	$.getImageData = function(args) {
+	$.fn.getImageData = function(args) {
 	
 		var regex_url_test = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 	
