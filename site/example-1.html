@@ -35,7 +35,7 @@
 		</footer>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-		<script src="https://github.com/betamax/getImageData/raw/master/jquery.getimagedata.js"></script>
+		<script src="./jquery.getimagedata.js"></script>
 		<script>
 		$(function(e){
 			
@@ -50,7 +50,6 @@
 					success: function(image){
 						
 						// Set the canvas width and heigh to the same as the image
-						console.log(image);
 						$(can).attr('width', image.width);
 						$(can).attr('height', image.height);
 						$(can).css({'background-color': 'none', 'border-color': '#fff'});
