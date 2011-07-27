@@ -36,63 +36,73 @@
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 		<script src="./jquery.getimagedata.js"></script>
-		<script>
-		$(function(e){
+		<script type="text/javascript">
+			$(function(e){
 			
-			// Set up the canvas
-			var can = document.getElementsByTagName('canvas')[0];
-			var ctx = can.getContext('2d');
+				// Set up the canvas
+				var can = document.getElementsByTagName('canvas')[0];
+				var ctx = can.getContext('2d');
 			
-			$("#get_image").click(function(){
-				var url = $("#url_field").val();
-				$.getImageData({
-					url: url,
-					success: function(image){
+				$("#get_image").click(function(){
+					var url = $("#url_field").val();
+					$.getImageData({
+						url: url,
+						success: function(image){
 						
-						// Set the canvas width and heigh to the same as the image
-						$(can).attr('width', image.width);
-						$(can).attr('height', image.height);
-						$(can).css({'background-color': 'none', 'border-color': '#fff'});
+							// Set the canvas width and heigh to the same as the image
+							$(can).attr('width', image.width);
+							$(can).attr('height', image.height);
+							$(can).css({'background-color': 'none', 'border-color': '#fff'});
 
-						// Draw the image on to the canvas
-						ctx.drawImage(image, 0, 0, image.width, image.height);
+							// Draw the image on to the canvas
+							ctx.drawImage(image, 0, 0, image.width, image.height);
 
-					},
-					error: function(xhr, text_status){
-						// Handle your error here
-					}
+						},
+						error: function(xhr, text_status){
+							// Handle your error here
+						}
+					});
 				});
+			
+				$("#invert").click(function(){
+				
+					var width = $(can).width(),
+					height = $(can).height();
+				
+					// Get the image data
+					var image_data = ctx.getImageData(0, 0,  width, height);
+					var image_data_array = image_data.data;
+
+					// Invert every pixel
+					for (var i = 0, j = image_data_array.length; i < j; i+=4) {
+						image_data_array[i] = 255 - image_data_array[i];
+						image_data_array[i+1] = 255 - image_data_array[i+1];
+						image_data_array[i+2] = 255 - image_data_array[i+2];
+					}
+
+					// Write the image data to the canvas
+					ctx.putImageData(image_data, 0, 0);
+				});
+			
 			});
 			
-			$("#invert").click(function(){
-				
-				var width = $(can).width(),
-				height = $(can).height();
-				
-				// Get the image data
-				var image_data = ctx.getImageData(0, 0,  width, height);
-				var image_data_array = image_data.data;
-
-				// Invert every pixel
-				for (var i = 0, j = image_data_array.length; i < j; i+=4) {
-					image_data_array[i] = 255 - image_data_array[i];
-					image_data_array[i+1] = 255 - image_data_array[i+1];
-					image_data_array[i+2] = 255 - image_data_array[i+2];
-				}
-
-				// Write the image data to the canvas
-				ctx.putImageData(image_data, 0, 0);
-			});
-			
-		});
-		</script>
-		
-		<script>
 			// To open links in new window
 			$('a[data-target="external"]').click(function(e){
 				window.open($(this).attr("href"));
 				return false;
 			});
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-18323541-1']);
+		  _gaq.push(['_setDomainName', '.maxnov.com']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
 		</script>
 	</body>
 </html>
