@@ -2,7 +2,7 @@ $.getImageData
 ==============
 *Version: 0.3*
 
-**Please be aware that while this plugin is still useful, there is a method to do this without any plugins called [CORS][cors_spec]. You can see a demo [here][cors_demo]. It's currently supported by Firefox 3.5+, Safari 4+, Chrome and IE8+. This plugin will remain useful for older browsers and for getting any images without restrictions.**
+**Please be aware that while this plugin is still useful, there is a method to do this without any plugins called [CORS][cors_spec]. You can see a demo [here][cors_demo]. It's currently supported by Firefox 3.5+, Safari 4+, Chrome and IE8+. This plugin will remain useful for older browsers and for getting any image without restrictions, e.g. Creative Commons images from Flickr.**
 
 This project is aimed at developers who don't have the ability, don't want to or don't have time to create a proxy script on their server to get images from different domains or origins. It enables pixel level access to images from different origins. It works by sending a JSONP request with the URL of the image to Google's servers via the Google App Engine. The server then converts the image into base64 encoded data URL and sends the image back as a JSON object. This means that the image can be locally included on the website and therefore it can be edited by the canvas tag.
 
