@@ -44,7 +44,9 @@ f=d("head")[0]||document.documentElement,q={},S=0,p,C={callback:L,url:location.h
 			// If url specified and is a url + if server is secure when image or user page is
 			if(args.server && regex_url_test.test(args.server) && (args.server.indexOf('https:') && (is_secure || args.url.indexOf('https:')))) {
 				server_url = args.server;
-			} else server_url = "//img-to-json.appspot.com/?callback=?";
+			} else server_url = "//img-to-json.appspot.com/";
+		
+			server_url += "?callback=?";
 		
 			// Using jquery-jsonp (http://code.google.com/p/jquery-jsonp/) for the request
 			// so that errors can be handled
