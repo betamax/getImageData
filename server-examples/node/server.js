@@ -24,7 +24,6 @@
  */
 
 // Include dependencies
-require.paths.unshift(__dirname + '/lib/')
 var express = require('express'),
 request = require('request'),
 BufferList = require('bufferlist').BufferList,
