@@ -28,6 +28,7 @@ var express = require('express'),
 request = require('request'),
 BufferList = require('bufferlist').BufferList,
 gm = require('gm'),
+imageMagick = gm.subClass({ imageMagick: true });
 http = require('http'),
 fs = require('fs'),
 sys = require('util');
@@ -85,7 +86,7 @@ app.get('/', function(req, res){
 					out.end();
 		
 					// Get the image dimensions using GraphicsMagick
-					gm(filename).size(function(err, size){
+					imageMagick(filename).size(function(err, size){
 						
 						// Delete the tmp image
 						fs.unlink(filename);
