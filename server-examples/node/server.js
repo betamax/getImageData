@@ -30,12 +30,11 @@ BufferList = require('bufferlist').BufferList,
 gm = require('gm'),
 http = require('http'),
 fs = require('fs'),
-sys = require('sys');
+sys = require('util');
 
 // Create the server
-var app = express.createServer(
-	express.logger()
-);
+  var express = require("express");
+  var app = express();
 
 // When requesting the root
 app.get('/', function(req, res){
