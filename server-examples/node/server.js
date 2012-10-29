@@ -24,19 +24,18 @@
  */
 
 // Include dependencies
-require.paths.unshift(__dirname + '/lib/')
 var express = require('express'),
 request = require('request'),
 BufferList = require('bufferlist').BufferList,
 gm = require('gm'),
+imageMagick = gm.subClass({ imageMagick: true });
 http = require('http'),
 fs = require('fs'),
-sys = require('sys');
+sys = require('util');
 
 // Create the server
-var app = express.createServer(
-	express.logger()
-);
+  var express = require("express");
+  var app = express();
 
 // When requesting the root
 app.get('/', function(req, res){
@@ -87,7 +86,7 @@ app.get('/', function(req, res){
 					out.end();
 		
 					// Get the image dimensions using GraphicsMagick
-					gm(filename).size(function(err, size){
+					imageMagick(filename).size(function(err, size){
 						
 						// Delete the tmp image
 						fs.unlink(filename);
