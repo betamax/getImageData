@@ -9,9 +9,9 @@
 		<!--[if IE]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="http://media.maxnov.com/getimagedata/min/g=css-example" rel="stylesheet" type="text/css">
+		<link href="/css/style-demo.css" rel="stylesheet" type="text/css">
 	</head>
-	
+
 	<body>
 		<h4><a href="./#examples-1">&laquo; Back</a></h4>
 		<br/>
@@ -26,29 +26,29 @@
 		</div>
 		<br style="clear:both"/>
 		<canvas width="640" height="480"></canvas>
-		
+
 		<div class="hr"><hr></div>
-		
+
 		<footer>
-			$.getImageData was created by <a href="http://www.maxnov.com/">Max Novakovic</a> in association with 
-			<a href="http://www.disturbmedia.com/" title="Disturb Media" data-target="external"><img src="http://media.maxnov.com/getimagedata/img/disturb-white.png" width="98" height="24" alt="Disturb Media" id="disturb-logo"></a>
+			$.getImageData was created by <a href="http://www.maxnov.com/">Max Novakovic</a>
 		</footer>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-		<script src="./jquery.getimagedata.js"></script>
+		<script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.min.js"></script>
 		<script type="text/javascript">
 			$(function(e){
-			
+
 				// Set up the canvas
 				var can = document.getElementsByTagName('canvas')[0];
 				var ctx = can.getContext('2d');
-			
+
 				$("#get_image").click(function(){
 					var url = $("#url_field").val();
 					$.getImageData({
 						url: url,
+						server: 'http://maxnov.com/getimagedata/getImageData.php',
 						success: function(image){
-						
+
 							// Set the canvas width and heigh to the same as the image
 							$(can).attr('width', image.width);
 							$(can).attr('height', image.height);
@@ -63,12 +63,12 @@
 						}
 					});
 				});
-			
+
 				$("#invert").click(function(){
-				
+
 					var width = $(can).width(),
 					height = $(can).height();
-				
+
 					// Get the image data
 					var image_data = ctx.getImageData(0, 0,  width, height);
 					var image_data_array = image_data.data;
@@ -83,9 +83,9 @@
 					// Write the image data to the canvas
 					ctx.putImageData(image_data, 0, 0);
 				});
-			
+
 			});
-			
+
 			// To open links in new window
 			$('a[data-target="external"]').click(function(e){
 				window.open($(this).attr("href"));

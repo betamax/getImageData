@@ -1,23 +1,6 @@
 /* Fonts */
-@font-face {
-  font-family: 'Cantarell';
-  font-style: normal;
-  font-weight: bold;
-  src: local('Cantarell'), url('http://themes.googleusercontent.com/font?kit=Yir4ZDsCn4g1kWopdg-ehPesZW2xOQ-xsNqO47m55DA') format('truetype');
-}
-@font-face {
-  font-family: 'Cantarell';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Cantarell'), url('http://themes.googleusercontent.com/font?kit=tGao7ZPoloMxQHxq-2oxNA') format('truetype');
-}
-@font-face {
-  font-family: 'OFL Sorts Mill Goudy TT';
-  font-style: normal;
-  font-weight: normal;
-  src: local('OFL Sorts Mill Goudy TT'), url('http://themes.googleusercontent.com/font?kit=9ZZVVBRCceNnPBXqWLH8IOLhrilDyef6adyH-Bknj3c') format('truetype');
-}
-
+@import '//fonts.googleapis.com/css?family=Cantarell:normal,700';
+@import '//fonts.googleapis.com/css?family=OFL Sorts Mill Goudy TT:normal,400';
 
 /* Reset */
 html,
@@ -29,10 +12,10 @@ html, body {
 	height:100%;
 }
 
-body { 
-	font-family: Cantarell, Arial, sans-serif; 
-	width:960px; 
-	margin:20px auto; 
+body {
+	font-family: Cantarell, Arial, sans-serif;
+	width:960px;
+	margin:20px auto;
 	position:static;
 }
 
@@ -41,10 +24,10 @@ body {
 a:link { -webkit-tap-highlight-color:#ccc; }
 
 h1, h2, h3 {
-	font-family: 'OFL Sorts Mill Goudy TT', Georgia, serif; 
+	font-family: 'OFL Sorts Mill Goudy TT', Georgia, serif;
 	font-weight:normal;
 }
-h1 { 
+h1 {
 	font-size:3em;
 }
 h2 {
@@ -143,14 +126,14 @@ footer img {
 
   a, a:visited { color: #444 !important; text-decoration: underline; }
 
-  a:after { content: " (" attr(href) ")"; } 
+  a:after { content: " (" attr(href) ")"; }
 
   abbr:after { content: " (" attr(title) ")"; }
-  
+
   .ir a:after { content: ""; }  /* Don't show links for images */
-  
+
   pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  
+
   img { page-break-inside: avoid; }
 
   @page { margin: 0.5cm; }
@@ -164,22 +147,22 @@ footer img {
  * Media queries for responsive design
  */
 
-@media all and (orientation:portrait) { 
+@media all and (orientation:portrait) {
   /* Style adjustments for portrait mode goes here */
-  
+
 }
 
-@media all and (orientation:landscape) { 
+@media all and (orientation:landscape) {
   /* Style adjustments for landscape mode goes here */
-  
+
 }
 
-/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)
    Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
-  
-  
+
+
   /* Prevent iOS, WinMobile from adjusting font size */
-  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } 
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; }
 }
 

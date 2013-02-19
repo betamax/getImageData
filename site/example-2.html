@@ -9,9 +9,9 @@
 		<!--[if IE]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="http://media.maxnov.com/getimagedata/min/g=css-example" rel="stylesheet" type="text/css">
+		<link href="/css/style-demo.css" rel="stylesheet" type="text/css">
 	</head>
-	
+
 	<body>
 		<h4><a href="./#examples-2">&laquo; Back to this example</a></h4>
 		<br/>
@@ -24,59 +24,59 @@
 		<div class="images">
 		</div>
 		<div class="hr"><hr></div>
-		
+
 		<footer>
-			$.getImageData was created by <a href="http://www.maxnov.com/">Max Novakovic</a> in association with 
-			<a href="http://www.disturbmedia.com/" title="Disturb Media" data-target="external"><img src="http://media.maxnov.com/getimagedata/img/disturb-white.png" width="98" height="24" alt="Disturb Media" id="disturb-logo"></a>
+			$.getImageData was created by <a href="http://www.maxnov.com/">Max Novakovic</a>
 		</footer>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-		<script src="./jquery.getimagedata.js"></script>
+		<script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.min.js"></script>
 		<script type="text/javascript">
 			$(function(e){
-			
+
 				$("#load").click(function(){
-				
+
 					// Get the flickr feed
 					$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?tags=colour&tagmode=any&format=json&jsoncallback=?", function(data){
-          
+
 						// For each image
 						$.each(data.items, function(i,item){
-						
+
 							$.getImageData({
 								url: item.media.m, // This is the URL of the flickr image
+								server: 'http://maxnov.com/getimagedata/getImageData.php',
 								success: analyseAndDraw, // Run this function when image has been fetched
 								error: function(xhr, text_status){
 									// Handle your error here
 								}
 							});
-						
+
 	          });
 
 	        });
-				
+
 					// This creates a canvas, draws the image on to it, gets the average colour of the image and then adds the
 					// image to the DOM with the average colour as a background colour to its container
 					function analyseAndDraw(image) {
 						// Create the canvas and context
 						var can = document.createElement('canvas');
 						var ctx = can.getContext('2d');
-					
+
 						// Set the canvas dimensions
 						$(can).attr('width', image.width);
 						$(can).attr('height', image.height);
-					
+
 						// Draw the image to the canvas
 						ctx.drawImage(image, 0, 0, image.width, image.height);
-					
+
 						// Get the image data
 						var image_data = ctx.getImageData(0, 0,  image.width, image.height);
 						var image_data_array = image_data.data;
 						var image_data_array_length = image_data_array.length;
-					
+
 						// Array to hold the average totals
 						var a=[0,0,0];
-				
+
 						// Accumulate the pixel colours
 						for (var i = 0; i < image_data_array_length; i += 4){
 							a[0]+=image_data_array[i];
@@ -88,24 +88,24 @@
 						a[0] = Math.round(a[0]/=(image_data_array_length/3)); // R
 						a[1] = Math.round(a[1]/=(image_data_array_length/3)); // G
 						a[2] = Math.round(a[2]/=(image_data_array_length/3)); // B
-					
+
 						// Create the container, set its background colour and add it to the DOM
 						var imageContainer = $('<div style="background-color:rgb('+a[0]+','+a[1]+','+a[2]+')"></div>');
 						$(".images").append(imageContainer);
-					
+
 						// Insert the image to the container
 						$(imageContainer).append(image);
 					}
 				});
-				
+
 			});
-		
+
 			// To open links in new window
 			$('a[data-target="external"]').click(function(e){
 				window.open($(this).attr("href"));
 				return false;
 			});
-			
+
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-18323541-1']);
 		  _gaq.push(['_setDomainName', '.maxnov.com']);
