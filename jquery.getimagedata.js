@@ -42,7 +42,7 @@ f=d("head")[0]||document.documentElement,q={},S=0,p,C={callback:L,url:location.h
 			var server_url = "";
 		
 			// If url specified and is a url + if server is secure when image or user page is
-			if(args.server && regex_url_test.test(args.server) && (args.server.indexOf('https:') && (is_secure || args.url.indexOf('https:')))) {
+			if(args.server && regex_url_test.test(args.server) && !(is_secure && args.server.indexOf('http:') == 0)) {
 				server_url = args.server;
 			} else server_url = "//img-to-json.appspot.com/";
 		
