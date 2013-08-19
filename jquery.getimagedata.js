@@ -8,9 +8,9 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *  
- *  Includes jQuery JSONP Core Plugin 2.1.4
- *  http://code.google.com/p/jquery-jsonp/
- *  Copyright 2010, Julian Aubourg
+ *  Includes jQuery JSONP Core Plugin 2.4.0 (2012-08-21)
+ *  https://github.com/jaubourg/jquery-jsonp
+ *  Copyright 2012, Julian Aubourg
  *  Released under the MIT License.
  * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -22,10 +22,10 @@
  */
 
 // jQuery JSONP
-(function(d,l){function w(){}function Q(a){p=[a]}function g(a,h,i){return a&&a.apply(h.context||h,i)}function x(a){function h(b){!j++&&l(function(){m();n&&(q[c]={s:[b]});y&&(b=y.apply(a,[b]));g(a.success,a,[b,z]);g(A,a,[a,z])},0)}function i(b){!j++&&l(function(){m();n&&b!=B&&(q[c]=b);g(a.error,a,[a,b]);g(A,a,[a,b])},0)}a=d.extend({},C,a);var A=a.complete,y=a.dataFilter,D=a.callbackParameter,E=a.callback,R=a.cache,n=a.pageCache,F=a.charset,c=a.url,e=a.data,G=a.timeout,o,j=0,m=w;a.abort=function(){!j++&&
-m()};if(g(a.beforeSend,a,[a])===false||j)return a;c=c||r;e=e?typeof e=="string"?e:d.param(e,a.traditional):r;c+=e?(/\?/.test(c)?"&":"?")+e:r;D&&(c+=(/\?/.test(c)?"&":"?")+encodeURIComponent(D)+"=?");!R&&!n&&(c+=(/\?/.test(c)?"&":"?")+"_"+(new Date).getTime()+"=");c=c.replace(/=\?(&|$)/,"="+E+"$1");n&&(o=q[c])?o.s?h(o.s[0]):i(o):l(function(b,k,s){if(!j){s=G>0&&l(function(){i(B)},G);m=function(){s&&clearTimeout(s);b[H]=b[t]=b[I]=b[u]=null;f[J](b);k&&f[J](k)};window[E]=Q;b=d(K)[0];b.id=L+S++;if(F)b[T]=
-F;var N=function(v){(b[t]||w)();v=p;p=undefined;v?h(v[0]):i(M)};if(O.msie){b.event=t;b.htmlFor=b.id;b[H]=function(){/loaded|complete/.test(b.readyState)&&N()}}else{b[u]=b[I]=N;O.opera?(k=d(K)[0]).text="jQuery('#"+b.id+"')[0]."+u+"()":b[P]=P}b.src=c;f.insertBefore(b,f.firstChild);k&&f.insertBefore(k,f.firstChild)}},0);return a}var P="async",T="charset",r="",M="error",L="_jqjsp",t="onclick",u="on"+M,I="onload",H="onreadystatechange",J="removeChild",K="<script/>",z="success",B="timeout",O=d.browser,
-f=d("head")[0]||document.documentElement,q={},S=0,p,C={callback:L,url:location.href};x.setup=function(a){d.extend(C,a)};d.jsonp=x})(jQuery,setTimeout);
+(function(d){function U(){}function V(a){r=[a]}function e(a,d,e){return a&&a.apply(d.context||d,e)}function g(a){function g(b){l++||(m(),n&&(t[c]={s:[b]}),A&&(b=A.apply(a,[b])),e(u,a,[b,B,a]),e(C,a,[a,B]))}function s(b){l++||(m(),n&&b!=D&&(t[c]=b),e(v,a,[a,b]),e(C,a,[a,b]))}a=d.extend({},E,a);var u=a.success,v=a.error,C=a.complete,A=a.dataFilter,p=a.callbackParameter,F=a.callback,W=a.cache,n=a.pageCache,G=a.charset,c=a.url,f=a.data,H=a.timeout,q,l=0,m=U,b,h,w;I&&I(function(a){a.done(u).fail(v);u=
+a.resolve;v=a.reject}).promise(a);a.abort=function(){!l++&&m()};if(!1===e(a.beforeSend,a,[a])||l)return a;c=c||x;f=f?"string"==typeof f?f:d.param(f,a.traditional):x;c+=f?(/\?/.test(c)?"&":"?")+f:x;p&&(c+=(/\?/.test(c)?"&":"?")+encodeURIComponent(p)+"=?");W||n||(c+=(/\?/.test(c)?"&":"?")+"_"+(new Date).getTime()+"=");c=c.replace(/=\?(&|$)/,"="+F+"$1");n&&(q=t[c])?q.s?g(q.s[0]):s(q):(J[F]=V,b=d(K)[0],b.id=L+X++,G&&(b[Y]=G),M&&11.6>M.version()?(h=d(K)[0]).text="document.getElementById('"+b.id+"')."+
+y+"()":b[N]=N,Z&&(b.htmlFor=b.id,b.event=z),b[O]=b[y]=b[P]=function(a){if(!b[Q]||!/i/.test(b[Q])){try{b[z]&&b[z]()}catch(c){}a=r;r=0;a?g(a[0]):s(R)}},b.src=c,m=function(a){w&&clearTimeout(w);b[P]=b[O]=b[y]=null;k[S](b);h&&k[S](h)},k[T](b,p=k.firstChild),h&&k[T](h,p),w=0<H&&setTimeout(function(){s(D)},H));return a}var N="async",Y="charset",x="",R="error",T="insertBefore",L="_jqjsp",z="onclick",y="on"+R,O="onload",P="onreadystatechange",Q="readyState",S="removeChild",K="<script>",B="success",D="timeout",
+J=window,I=d.Deferred,k=d("head")[0]||document.documentElement,t={},X=0,r,E={callback:L,url:location.href},M=J.opera,Z=!!d("<div>").html("\x3c!--[if IE]><i><![endif]--\x3e").find("i").length;g.setup=function(a){d.extend(E,a)};d.jsonp=g})(jQuery);
 
 (function( $ ){
 
