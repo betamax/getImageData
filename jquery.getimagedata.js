@@ -54,7 +54,7 @@ J=window,I=d.Deferred,k=d("head")[0]||document.documentElement,t={},X=0,r,E={cal
 				url: server_url,
 				data: { url: escape(args.url) },
 				dataType: 'jsonp',
-				timeout: 10000,
+				timeout: args.timeout || 10000,
 				// It worked!
 				success: function(data, status) {
 			
