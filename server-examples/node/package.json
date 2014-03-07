@@ -1,0 +1,14 @@
+{
+  "name": "getimagedata-node-server",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "~3.5.0",
+    "request": "~2.34.0",
+    "bufferlist": "~0.1.0",
+    "gm": "~1.14.2"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
