@@ -14,7 +14,7 @@ Requirements
 Installation
 -----
 
-Firstly, you will need node.js. You can find [OS X install instructions here][osx_install]. If you are running a Linux distro, then [these instructions to install node.js on Ubuntu][ubuntu_install] should help you.
+Firstly, you will need node.js which you can get [here][node_install].
 
 As a dependency to the gm module, you will need to install [GraphicsMagick][graphicsmagick] which you can do with the following command (it requires [homebrew][homebrew]) on OS X:
 
@@ -26,21 +26,13 @@ To download the server, you can run this command:
 
 Note: this will download all the files from the project. Alternatively, you can download the project from github using the download button.
 
-I *hope* that all the dependencies of the project are included with the server however, if they are not then this is the list of them:
+To install the dependencies of the project run:
 
- * [express][express_link]
- * [bufferlist][bufferlist_link]
- * [gm][gm_link]
- * [connect][connect_link]
-
-If you have npm installed then you can install each one by running:
-
-    npm install dependency_name_here
+    npm install
 
 That should be all you need to do to get the server running.
 
-[osx_install]: http://shapeshed.com/journal/setting-up-nodejs-and-npm-on-mac-osx/
-[ubuntu_install]: http://www.giantflyingsaucer.com/blog/?p=894
+[node_install]: http://nodejs.org/download/
 [graphicsmagick]: http://www.graphicsmagick.org/
 [homebrew]: https://github.com/mxcl/homebrew
 [node_link]: http://nodejs.org/
@@ -64,16 +56,21 @@ Hooking it up to $.getImageData
 Using $.getImageData all you need to do to connect it to the node server is change the server parameter when initialising the plugin like so:
 
     $.getImageData({
-      url: "http://www.google.co.uk/images/logos/ps_logo2.png", 
+      url: "http://www.google.co.uk/images/logos/ps_logo2.png",
       server: "http://127.0.0.1:3000/"
       success: callback(image){
-			
+
       }
     });
 
 
 Changelog
 ---------
+
+07/03/14
+
+ * Removed node_modules from git and created package.json to handle them instead
+ * Updated server code so that it runs with latest dependencies
 
 13/01/11
 
